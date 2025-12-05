@@ -33,6 +33,7 @@ export const metadata: Metadata = {
 };
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { ClickSoundProvider } from "@/components/click-sound-provider";
 
 // ... (existing imports)
 
@@ -52,7 +53,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <ClickSoundProvider>
+            {children}
+          </ClickSoundProvider>
         </ThemeProvider>
         <Toaster />
       </body>
