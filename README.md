@@ -1,141 +1,316 @@
-# 🚀 Welcome to Z.ai Code Scaffold
+# 🌟 Adi Mulyadi - Digital Wordsmith Portfolio
 
-A modern, production-ready web application scaffold powered by cutting-edge technologies, designed to accelerate your development with [Z.ai](https://chat.z.ai)'s AI-powered coding assistance.
+A modern, cyberpunk-themed personal portfolio website showcasing writing, tech articles, and creative fiction. Built with Next.js 15, React 19, and powered by a markdown-based blog system.
 
-## ✨ Technology Stack
+![Next.js](https://img.shields.io/badge/Next.js-15.3.5-black)
+![React](https://img.shields.io/badge/React-19.0.0-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38bdf8)
 
-This scaffold provides a robust foundation built with:
-
-### 🎯 Core Framework
-- **⚡ Next.js 15** - The React framework for production with App Router
-- **📘 TypeScript 5** - Type-safe JavaScript for better developer experience
-- **🎨 Tailwind CSS 4** - Utility-first CSS framework for rapid UI development
-
-### 🧩 UI Components & Styling
-- **🧩 shadcn/ui** - High-quality, accessible components built on Radix UI
-- **🎯 Lucide React** - Beautiful & consistent icon library
-- **🌈 Framer Motion** - Production-ready motion library for React
-- **🎨 Next Themes** - Perfect dark mode in 2 lines of code
-
-### 📋 Forms & Validation
-- **🎣 React Hook Form** - Performant forms with easy validation
-- **✅ Zod** - TypeScript-first schema validation
-
-### 🔄 State Management & Data Fetching
-- **🐻 Zustand** - Simple, scalable state management
-- **🔄 TanStack Query** - Powerful data synchronization for React
-- **🌐 Axios** - Promise-based HTTP client
-
-### 🗄️ Database & Backend
-- **🗄️ Prisma** - Next-generation Node.js and TypeScript ORM
-- **🔐 NextAuth.js** - Complete open-source authentication solution
-
-### 🎨 Advanced UI Features
-- **📊 TanStack Table** - Headless UI for building tables and datagrids
-- **🖱️ DND Kit** - Modern drag and drop toolkit for React
-- **📊 Recharts** - Redefined chart library built with React and D3
-- **🖼️ Sharp** - High performance image processing
-
-### 🌍 Internationalization & Utilities
-- **🌍 Next Intl** - Internationalization library for Next.js
-- **📅 Date-fns** - Modern JavaScript date utility library
-- **🪝 ReactUse** - Collection of essential React hooks for modern development
-
-## 🎯 Why This Scaffold?
-
-- **🏎️ Fast Development** - Pre-configured tooling and best practices
-- **🎨 Beautiful UI** - Complete shadcn/ui component library with advanced interactions
-- **🔒 Type Safety** - Full TypeScript configuration with Zod validation
-- **📱 Responsive** - Mobile-first design principles with smooth animations
-- **🗄️ Database Ready** - Prisma ORM configured for rapid backend development
-- **🔐 Auth Included** - NextAuth.js for secure authentication flows
-- **📊 Data Visualization** - Charts, tables, and drag-and-drop functionality
-- **🌍 i18n Ready** - Multi-language support with Next Intl
-- **🚀 Production Ready** - Optimized build and deployment settings
-- **🤖 AI-Friendly** - Structured codebase perfect for AI assistance
-
-## 🚀 Quick Start
-
-```bash
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-```
-
-Open [http://localhost:3000](http://localhost:3000) to see your application running.
-
-## 🤖 Powered by Z.ai
-
-This scaffold is optimized for use with [Z.ai](https://chat.z.ai) - your AI assistant for:
-
-- **💻 Code Generation** - Generate components, pages, and features instantly
-- **🎨 UI Development** - Create beautiful interfaces with AI assistance  
-- **🔧 Bug Fixing** - Identify and resolve issues with intelligent suggestions
-- **📝 Documentation** - Auto-generate comprehensive documentation
-- **🚀 Optimization** - Performance improvements and best practices
-
-Ready to build something amazing? Start chatting with Z.ai at [chat.z.ai](https://chat.z.ai) and experience the future of AI-powered development!
-
-## 📁 Project Structure
-
-```
-src/
-├── app/                 # Next.js App Router pages
-├── components/          # Reusable React components
-│   └── ui/             # shadcn/ui components
-├── hooks/              # Custom React hooks
-└── lib/                # Utility functions and configurations
-```
-
-## 🎨 Available Features & Components
-
-This scaffold includes a comprehensive set of modern web development tools:
-
-### 🧩 UI Components (shadcn/ui)
-- **Layout**: Card, Separator, Aspect Ratio, Resizable Panels
-- **Forms**: Input, Textarea, Select, Checkbox, Radio Group, Switch
-- **Feedback**: Alert, Toast (Sonner), Progress, Skeleton
-- **Navigation**: Breadcrumb, Menubar, Navigation Menu, Pagination
-- **Overlay**: Dialog, Sheet, Popover, Tooltip, Hover Card
-- **Data Display**: Badge, Avatar, Calendar
-
-### 📊 Advanced Data Features
-- **Tables**: Powerful data tables with sorting, filtering, pagination (TanStack Table)
-- **Charts**: Beautiful visualizations with Recharts
-- **Forms**: Type-safe forms with React Hook Form + Zod validation
-
-### 🎨 Interactive Features
-- **Animations**: Smooth micro-interactions with Framer Motion
-- **Drag & Drop**: Modern drag-and-drop functionality with DND Kit
-- **Theme Switching**: Built-in dark/light mode support
-
-### 🔐 Backend Integration
-- **Authentication**: Ready-to-use auth flows with NextAuth.js
-- **Database**: Type-safe database operations with Prisma
-- **API Client**: HTTP requests with Axios + TanStack Query
-- **State Management**: Simple and scalable with Zustand
-
-### 🌍 Production Features
-- **Internationalization**: Multi-language support with Next Intl
-- **Image Optimization**: Automatic image processing with Sharp
-- **Type Safety**: End-to-end TypeScript with Zod validation
-- **Essential Hooks**: 100+ useful React hooks with ReactUse for common patterns
-
-## 🤝 Get Started with Z.ai
-
-1. **Clone this scaffold** to jumpstart your project
-2. **Visit [chat.z.ai](https://chat.z.ai)** to access your AI coding assistant
-3. **Start building** with intelligent code generation and assistance
-4. **Deploy with confidence** using the production-ready setup
+🌐 **Live Demo**: [Coming Soon]
 
 ---
 
-Built with ❤️ for the developer community. Supercharged by [Z.ai](https://chat.z.ai) 🚀
+## ✨ Features
+
+### 🎨 Stunning Visual Design
+- **Cyberpunk Aesthetic** - Neon colors, animated galaxy backgrounds with 600+ stars
+- **Dark/Light Mode** - Seamless theme switching with persistent preferences
+- **Responsive Design** - Mobile-first approach, works beautifully on all devices
+- **Smooth Animations** - Nebulas, UFOs, shooting stars, and interactive elements
+
+### 📝 Markdown-Based Blog System
+- **Easy Content Management** - Write blog posts in simple markdown files
+- **No Database Required** - File-based content with frontmatter metadata
+- **Category Filtering** - Blog, Fiction, Tech Writing, Creative categories
+- **Featured Posts** - Highlight your best work
+- **Tags System** - Organize and discover content easily
+- **Auto-Generated** - Posts automatically appear on the website
+
+### 📧 Contact Integration
+- **EmailJS Integration** - Functional contact form with email notifications
+- **Form Validation** - Client-side validation for better UX
+- **Social Links** - GitHub, Twitter, LinkedIn, Email
+
+### 🛡️ Security & Performance
+- Security headers configured
+- Environment variables for sensitive data
+- Optimized for production deployment
+- See [SECURITY.md](./SECURITY.md) for details
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js 18+ 
+- npm or yarn
+- Git
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/adimulyadi-ch/my-portfolio.git
+   cd my-portfolio
+   ```
+
+2. **Install dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Set up environment variables**
+   ```bash
+   cp .env.example .env.local
+   ```
+   
+   Edit `.env.local` and add your EmailJS credentials:
+   ```env
+   NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
+   NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
+   NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
+   ```
+
+4. **Run development server**
+   ```bash
+   npm run dev
+   ```
+
+5. **Open in browser**
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## 📝 Adding Blog Posts
+
+### Quick Guide
+
+1. Navigate to `content/blog/` folder
+2. Create a new file: `my-post-name.md`
+3. Add frontmatter and content:
+
+```markdown
+---
+title: "My Blog Post Title"
+date: "2024-12-05"
+category: "blog"
+tags: ["Tag1", "Tag2"]
+featured: false
+readTime: "5 min"
+description: "Brief description"
+---
+
+# My Blog Post
+
+Your content here...
+```
+
+4. Save the file - it will automatically appear on your website!
+
+📚 **Full Guide**: See [content/HOW_TO_ADD_BLOG_POSTS.md](./content/HOW_TO_ADD_BLOG_POSTS.md)
+
+📋 **Template**: Use [content/blog/_template.md](./content/blog/_template.md) as a starting point
+
+---
+
+## 📦 Available Scripts
+
+```bash
+# Development
+npm run dev          # Start dev server on port 3000
+
+# Production
+npm run build        # Build for production
+npm start            # Start production server
+
+# Code Quality
+npm run lint         # Run ESLint
+```
+
+---
+
+## 🏗️ Project Structure
+
+```
+├── content/
+│   ├── blog/                      # Markdown blog posts
+│   │   ├── _template.md           # Blog post template
+│   │   └── *.md                   # Your blog posts
+│   └── HOW_TO_ADD_BLOG_POSTS.md   # Blog documentation
+├── public/
+│   ├── am-logo.svg                # Custom logo
+│   └── profil.png                 # Profile image
+├── src/
+│   ├── app/
+│   │   ├── api/
+│   │   │   └── blog/              # Blog API endpoint
+│   │   ├── globals.css            # Global styles
+│   │   ├── layout.tsx             # Root layout
+│   │   └── page.tsx               # Main page
+│   ├── components/
+│   │   ├── ui/                    # Shadcn/ui components
+│   │   ├── theme-provider.tsx     # Theme context
+│   │   └── mode-toggle.tsx        # Dark/Light toggle
+│   └── lib/
+│       └── blog.ts                # Blog utilities
+├── .env.example                   # Environment variables template
+├── .env.local                     # Your environment variables (gitignored)
+├── next.config.ts                 # Next.js configuration
+├── tailwind.config.ts             # Tailwind configuration
+├── SECURITY.md                    # Security documentation
+└── README.md                      # This file
+```
+
+---
+
+## 🎨 Customization
+
+### Update Personal Information
+
+Edit `src/app/page.tsx`:
+- Name and title
+- Bio and about section
+- Social media links
+- Contact information
+
+### Change Colors
+
+Edit `src/app/globals.css`:
+- Cyan: `#22d3ee`
+- Purple: `#a855f7`
+- Pink: `#ec4899`
+
+### Replace Logo
+
+Replace `public/am-logo.svg` with your own logo.
+
+### Replace Profile Image
+
+Replace `public/profil.png` with your profile photo.
+
+---
+
+## 🚀 Deployment
+
+### Deploy to Vercel (Recommended)
+
+1. Push your code to GitHub
+2. Go to [vercel.com](https://vercel.com)
+3. Import your repository
+4. Add environment variables
+5. Deploy!
+
+📚 **Full Guide**: See [deployment_guide.md](./deployment_guide.md) in the artifacts
+
+### Deploy to Netlify
+
+1. Push your code to GitHub
+2. Go to [netlify.com](https://netlify.com)
+3. Import your repository
+4. Configure build settings
+5. Deploy!
+
+---
+
+## 🔧 Tech Stack
+
+### Core
+- **Next.js 15.3.5** - React framework with App Router
+- **React 19** - UI library
+- **TypeScript 5** - Type safety
+- **Tailwind CSS 4** - Utility-first styling
+
+### Blog System
+- **gray-matter** - Parse markdown frontmatter
+- **remark** - Markdown processor
+- **remark-html** - Convert markdown to HTML
+
+### UI Components
+- **Shadcn/ui** - Component library
+- **Radix UI** - Headless accessible components
+- **Lucide React** - Beautiful icons
+- **Framer Motion** - Smooth animations
+
+### Integrations
+- **EmailJS** - Contact form email delivery
+- **next-themes** - Dark/Light mode
+
+---
+
+## 📱 Responsive Breakpoints
+
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: > 1024px
+
+---
+
+## 🌐 Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+---
+
+## 👤 Author
+
+**Adi Mulyadi** - Digital Wordsmith
+
+- Website: [adimulyadi.com](https://adimulyadi.com)
+- GitHub: [@adimulyadi-ch](https://github.com/adimulyadi-ch)
+- Email: adimulyadi.ch@gmail.com
+
+---
+
+## 🙏 Acknowledgments
+
+- Design inspiration from cyberpunk aesthetics and modern portfolio websites
+- UI components from [Shadcn/ui](https://ui.shadcn.com/)
+- Icons from [Lucide React](https://lucide.dev/)
+- Animations powered by [Framer Motion](https://www.framer.com/motion/)
+
+---
+
+## 📝 Changelog
+
+### Version 1.1.0 (2024-12-05)
+- ✅ Markdown-based blog system
+- ✅ Blog post template and documentation
+- ✅ API endpoint for blog posts
+- ✅ EmailJS integration for contact form
+- ✅ Updated GitHub username to adimulyadi-ch
+
+### Version 1.0.0 (2024-12-02)
+- ✅ Initial release
+- ✅ Dark/Light mode
+- ✅ Responsive design
+- ✅ Security headers
+- ✅ Animated galaxy backgrounds
+- ✅ Complete portfolio sections
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/adimulyadi-ch/my-portfolio/issues).
+
+---
+
+## ⭐ Show Your Support
+
+Give a ⭐️ if you like this project!
+
+---
+
+**Made with ❤️ and ☕ by Adi Mulyadi**

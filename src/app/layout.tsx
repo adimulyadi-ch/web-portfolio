@@ -14,24 +14,21 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Z.ai Code Scaffold - AI-Powered Development",
-  description: "Modern Next.js scaffold optimized for AI-powered development with Z.ai. Built with TypeScript, Tailwind CSS, and shadcn/ui.",
-  keywords: ["Z.ai", "Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "AI development", "React"],
-  authors: [{ name: "Z.ai Team" }],
-  icons: {
-    icon: "https://z-cdn.chatglm.cn/z-ai/static/logo.svg",
-  },
+  title: "Adi Mulyadi",
+  description: "Personal portfolio and literary archive of Adi Mulyadi - Tech Writer & Fiction Author.",
+  keywords: ["Adi Mulyadi", "Writer", "Fiction", "Tech Writing", "Portfolio", "Next.js"],
+  authors: [{ name: "Adi Mulyadi" }],
   openGraph: {
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
-    url: "https://chat.z.ai",
-    siteName: "Z.ai",
+    title: "Adi Mulyadi - Digi Art & Wordsmith",
+    description: "Crafting narratives where technology meets humanity.",
+    url: "https://adimulyadi.com",
+    siteName: "Adi Mulyadi",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Z.ai Code Scaffold",
-    description: "AI-powered development with modern React stack",
+    title: "Adi Mulyadi",
+    description: "Tech Writer & Fiction Author",
   },
 };
 

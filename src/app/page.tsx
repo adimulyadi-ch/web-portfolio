@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useEffect } from 'react'
-import { Book, Code, Coffee, Mail, Github, Twitter, Linkedin, ChevronRight, Star, Calendar, User, Zap, Terminal, FileText, Award, MessageSquare } from 'lucide-react'
+import { useState, useEffect, useRef } from 'react'
+import { Book, Code, Coffee, Mail, Github, Twitter, Linkedin, ChevronRight, Star, Calendar, User, Zap, Terminal, FileText, Award, MessageSquare, Send, Loader2 } from 'lucide-react'
+import emailjs from '@emailjs/browser'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -33,9 +34,125 @@ export default function Home() {
   const [selectedWork, setSelectedWork] = useState<Work | null>(null)
   const [stars, setStars] = useState<Array<{ id: string; x: number; y: number; size: number; color: string; duration: number; delay: number }>>([])
   const [isClient, setIsClient] = useState(false)
+  const [works, setWorks] = useState<Work[]>([])
+
+  // Contact form state
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+  const [formStatus, setFormStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+  const [formError, setFormError] = useState('')
+  const formRef = useRef<HTMLFormElement>(null)
+
+  // Smooth scroll function
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }
+
+  // Handle form input change
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({ ...prev, [name]: value }))
+    setFormError('')
+  }
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setFormError('')
+
+    // Validation
+    if (!formData.name || formData.name.length < 2) {
+      setFormError('Please enter your name (minimum 2 characters)')
+      return
+    }
+    if (!formData.email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      setFormError('Please enter a valid email address')
+      return
+    }
+    if (!formData.message || formData.message.length < 10) {
+      setFormError('Please enter a message (minimum 10 characters)')
+      return
+    }
+
+    setFormStatus('loading')
+
+    try {
+      // Check if EmailJS is configured
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+
+      // Debug: Check if env vars are loaded
+      console.log('EmailJS Config Check:', {
+        serviceId: serviceId ? 'Present' : 'Missing',
+        templateId: templateId ? 'Present' : 'Missing',
+        publicKey: publicKey ? 'Present' : 'Missing'
+      })
+
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error('EmailJS not configured. Please set up your environment variables.')
+      }
+
+      // Send email using EmailJS
+      await emailjs.send(
+        serviceId,
+        templateId,
+        {
+          from_name: formData.name,
+          from_email: formData.email,
+          message: formData.message,
+          to_name: 'Adi Mulyadi'
+        },
+        publicKey
+      )
+
+      setFormStatus('success')
+      setFormData({ name: '', email: '', message: '' })
+
+      // Reset success message after 5 seconds
+      setTimeout(() => {
+        setFormStatus('idle')
+      }, 5000)
+    } catch (error) {
+      console.error('Email send error details:', error)
+      setFormStatus('error')
+      // Display full error details for debugging
+      const errorMessage = error instanceof Error
+        ? error.message
+        : typeof error === 'object'
+          ? JSON.stringify(error)
+          : String(error)
+      setFormError(`Debug Error: ${errorMessage}`)
+
+      // Reset error after 5 seconds
+      setTimeout(() => {
+        setFormStatus('idle')
+      }, 5000)
+    }
+  }
 
   useEffect(() => {
     setIsClient(true)
+
+    // Load blog posts from markdown files
+    async function loadPosts() {
+      try {
+        const response = await fetch('/api/blog')
+        if (response.ok) {
+          const posts = await response.json()
+          setWorks(posts)
+        }
+      } catch (error) {
+        console.error('Error loading blog posts:', error)
+        // Fallback to empty array if API fails
+        setWorks([])
+      }
+    }
+
+    loadPosts()
+
     // Generate stars only on client side
     const generatedStars = [
       // White stars
@@ -81,64 +198,6 @@ export default function Home() {
     ]
     setStars(generatedStars)
   }, [])
-
-  const works: Work[] = [
-    {
-      id: '1',
-      title: 'Neural Networks in Fiction',
-      description: 'Exploring the intersection of artificial intelligence and creative writing in modern literature.',
-      category: 'tech-writing',
-      date: '2024-01-15',
-      readTime: '8 min',
-      featured: true,
-      link: '#',
-      tags: ['AI', 'Literature', 'Technology']
-    },
-    {
-      id: '2',
-      title: 'The Cyberpunk Chronicles',
-      description: 'A collection of short stories set in dystopian futures where humanity and technology collide.',
-      category: 'fiction',
-      date: '2024-01-10',
-      readTime: '12 min',
-      featured: true,
-      link: '#',
-      tags: ['Cyberpunk', 'Fiction', 'Short Stories']
-    },
-    {
-      id: '3',
-      title: 'Digital Marketing Trends 2024',
-      description: 'Comprehensive analysis of emerging marketing strategies in the digital age.',
-      category: 'blog',
-      date: '2024-01-05',
-      readTime: '6 min',
-      featured: false,
-      link: '#',
-      tags: ['Marketing', 'Digital', 'Trends']
-    },
-    {
-      id: '4',
-      title: 'Code Poetry: When Algorithms Meet Art',
-      description: 'An experimental piece combining programming concepts with poetic expression.',
-      category: 'creative',
-      date: '2023-12-28',
-      readTime: '5 min',
-      featured: false,
-      link: '#',
-      tags: ['Poetry', 'Code', 'Art']
-    },
-    {
-      id: '5',
-      title: 'The Writer\'s Guide to AI Tools',
-      description: 'How artificial intelligence is revolutionizing the writing process and content creation.',
-      category: 'tech-writing',
-      date: '2023-12-20',
-      readTime: '10 min',
-      featured: true,
-      link: '#',
-      tags: ['AI', 'Writing', 'Tools']
-    }
-  ]
 
   const testimonials: Testimonial[] = [
     {
@@ -464,16 +523,16 @@ export default function Home() {
                 </h1>
               </div>
               <nav className="hidden md:flex items-center gap-6">
-                <Button variant="ghost" className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300 hover:bg-cyan-900/20 border-2 border-transparent hover:border-gradient-to-r hover:from-cyan-500 hover:to-purple-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 rounded-full">
+                <Button onClick={() => scrollToSection('hero')} variant="ghost" className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300 hover:bg-cyan-900/20 border-2 border-transparent hover:border-gradient-to-r hover:from-cyan-500 hover:to-purple-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 rounded-full">
                   Home
                 </Button>
-                <Button variant="ghost" className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300 hover:bg-cyan-900/20 border-2 border-transparent hover:border-gradient-to-r hover:from-cyan-500 hover:to-purple-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 rounded-full">
+                <Button onClick={() => scrollToSection('works')} variant="ghost" className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300 hover:bg-cyan-900/20 border-2 border-transparent hover:border-gradient-to-r hover:from-cyan-500 hover:to-purple-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 rounded-full">
                   Works
                 </Button>
-                <Button variant="ghost" className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300 hover:bg-cyan-900/20 border border-transparent hover:border-gradient-to-r hover:from-cyan-500 hover:to-purple-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 rounded-full">
+                <Button onClick={() => scrollToSection('about')} variant="ghost" className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300 hover:bg-cyan-900/20 border border-transparent hover:border-gradient-to-r hover:from-cyan-500 hover:to-purple-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 rounded-full">
                   About
                 </Button>
-                <Button variant="ghost" className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300 hover:bg-cyan-900/20 border border-transparent hover:border-gradient-to-r hover:from-cyan-500 hover:to-purple-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 rounded-full">
+                <Button onClick={() => scrollToSection('contact')} variant="ghost" className="text-cyan-600 dark:text-cyan-400 hover:text-cyan-500 dark:hover:text-cyan-300 hover:bg-cyan-900/20 border border-transparent hover:border-gradient-to-r hover:from-cyan-500 hover:to-purple-500 hover:shadow-lg hover:shadow-cyan-500/20 transition-all duration-300 rounded-full">
                   Contact
                 </Button>
                 <ModeToggle />
@@ -483,7 +542,7 @@ export default function Home() {
         </header>
 
         {/* Hero Section */}
-        <section className="container mx-auto px-4 py-16">
+        <section id="hero" className="container mx-auto px-4 py-16">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: -20 }}
@@ -493,7 +552,7 @@ export default function Home() {
             >
               <div className="mb-8">
                 <motion.img
-                  src="/adi-mulyadi-avatar.png"
+                  src="/profil.png"
                   alt="Adi Mulyadi"
                   className="w-32 h-32 mx-auto rounded-full border-4 border-cyan-500 shadow-lg shadow-cyan-500/50 hover:scale-105 transition-transform duration-300"
                   initial={{ scale: 0.8, opacity: 0 }}
@@ -523,11 +582,11 @@ export default function Home() {
                 </Badge>
               </div>
               <div className="flex gap-4 justify-center">
-                <Button className="bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black font-bold px-8 w-48 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none">
+                <Button onClick={() => scrollToSection('works')} className="bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black font-bold px-8 w-48 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none">
                   <FileText className="w-4 h-4 mr-2" />
                   Read My Works
                 </Button>
-                <Button variant="outline" className="border-2 border-cyan-600 dark:border-cyan-400 text-cyan-400 hover:bg-cyan-900/20 hover:border-cyan-300 hover:shadow-lg hover:shadow-cyan-500/30 w-48 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none hover:text-cyan-400 active:!text-white active:!border-white focus:!text-white focus:!border-white active:opacity-100 transition-all duration-300">
+                <Button onClick={() => scrollToSection('contact')} variant="outline" className="border-2 border-cyan-600 dark:border-cyan-400 text-cyan-400 hover:bg-cyan-900/20 hover:border-cyan-300 hover:shadow-lg hover:shadow-cyan-500/30 w-48 rounded-tl-3xl rounded-br-3xl rounded-tr-none rounded-bl-none hover:text-cyan-400 active:!text-white active:!border-white focus:!text-white focus:!border-white active:opacity-100 transition-all duration-300">
                   <Mail className="w-4 h-4 mr-2" />
                   Get In Touch
                 </Button>
@@ -560,7 +619,7 @@ export default function Home() {
         </section>
 
         {/* Works Section */}
-        <section className="container mx-auto px-4 py-16">
+        <section id="works" className="container mx-auto px-4 py-16">
           <div className="max-w-6xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -666,7 +725,7 @@ export default function Home() {
         </section>
 
         {/* About Section */}
-        <section className="container mx-auto px-4 py-16">
+        <section id="about" className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -779,7 +838,7 @@ export default function Home() {
         </section>
 
         {/* Contact Section */}
-        <section className="container mx-auto px-4 py-16">
+        <section id="contact" className="container mx-auto px-4 py-16">
           <div className="max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -800,35 +859,119 @@ export default function Home() {
                   <div>
                     <h4 className="text-xl font-semibold text-cyan-300 mb-6">Direct Channels</h4>
                     <div className="space-y-4">
-                      <div className="flex items-center gap-3">
-                        <Mail className="w-5 h-5 text-cyan-400" />
-                        <span className="text-cyan-300">adi.mulyadi@digitalwriter.com</span>
-                      </div>
-                      <div className="flex items-center gap-3">
-                        <MessageSquare className="w-5 h-5 text-cyan-400" />
-                        <span className="text-cyan-300">Available for collaborations</span>
-                      </div>
+                      <a href="mailto:adimulyadi.ch@gmail.com" className="flex items-center gap-3 text-cyan-400 hover:text-cyan-300 transition-colors">
+                        <Mail className="w-5 h-5" />
+                        <span>adimulyadi.ch@gmail.com</span>
+                      </a>
+                      <a href="https://github.com/adimulyadi-ch" className="flex items-center gap-3 text-cyan-400 hover:text-cyan-300 transition-colors">
+                        <Github className="w-5 h-5" />
+                        <span>github.com/adimulyadi-ch</span>
+                      </a>
+                      <a href="https://twitter.com/adimulyadi" className="flex items-center gap-3 text-cyan-400 hover:text-cyan-300 transition-colors">
+                        <Twitter className="w-5 h-5" />
+                        <span>@adimulyadi</span>
+                      </a>
+                      <a href="https://linkedin.com/in/adimulyadi" className="flex items-center gap-3 text-cyan-400 hover:text-cyan-300 transition-colors">
+                        <Linkedin className="w-5 h-5" />
+                        <span>linkedin.com/in/adimulyadi</span>
+                      </a>
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-xl font-semibold text-cyan-300 mb-6">Network Nodes</h4>
-                    <div className="flex gap-4">
-                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                        <Button variant="outline" size="sm" className="border-cyan-600 text-cyan-400 hover:bg-cyan-900/20 rounded-full p-2">
-                          <Github className="w-5 h-5" />
-                        </Button>
-                      </motion.div>
-                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                        <Button variant="outline" size="sm" className="border-cyan-600 text-cyan-400 hover:bg-cyan-900/20 rounded-full p-2">
-                          <Twitter className="w-5 h-5" />
-                        </Button>
-                      </motion.div>
-                      <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-                        <Button variant="outline" size="sm" className="border-cyan-600 text-cyan-400 hover:bg-cyan-900/20 rounded-full p-2">
-                          <Linkedin className="w-5 h-5" />
-                        </Button>
-                      </motion.div>
-                    </div>
+                    <h4 className="text-xl font-semibold text-cyan-300 mb-6">Send Message</h4>
+
+                    <form ref={formRef} onSubmit={handleSubmit} className="space-y-4">
+                      {/* Name Input */}
+                      <div>
+                        <label htmlFor="name" className="block text-sm font-medium text-cyan-400 mb-2">
+                          Name *
+                        </label>
+                        <input
+                          type="text"
+                          id="name"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleInputChange}
+                          disabled={formStatus === 'loading'}
+                          className="w-full px-4 py-3 bg-black/50 border-2 border-cyan-800/50 rounded-lg text-cyan-100 placeholder-cyan-600/50 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all duration-300 disabled:opacity-50"
+                          placeholder="Your name"
+                          required
+                        />
+                      </div>
+
+                      {/* Email Input */}
+                      <div>
+                        <label htmlFor="email" className="block text-sm font-medium text-cyan-400 mb-2">
+                          Email *
+                        </label>
+                        <input
+                          type="email"
+                          id="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          disabled={formStatus === 'loading'}
+                          className="w-full px-4 py-3 bg-black/50 border-2 border-cyan-800/50 rounded-lg text-cyan-100 placeholder-cyan-600/50 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all duration-300 disabled:opacity-50"
+                          placeholder="your.email@example.com"
+                          required
+                        />
+                      </div>
+
+                      {/* Message Textarea */}
+                      <div>
+                        <label htmlFor="message" className="block text-sm font-medium text-cyan-400 mb-2">
+                          Message *
+                        </label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          disabled={formStatus === 'loading'}
+                          rows={4}
+                          className="w-full px-4 py-3 bg-black/50 border-2 border-800/50 rounded-lg text-cyan-100 placeholder-cyan-600/50 focus:border-cyan-500 focus:outline-none focus:ring-2 focus:ring-cyan-500/20 transition-all duration-300 resize-none disabled:opacity-50"
+                          placeholder="Your message..."
+                          required
+                        />
+                      </div>
+
+                      {/* Error Message */}
+                      {formError && (
+                        <div className="p-3 bg-red-900/20 border border-red-500/50 rounded-lg">
+                          <p className="text-red-400 text-sm">{formError}</p>
+                        </div>
+                      )}
+
+                      {/* Success Message */}
+                      {formStatus === 'success' && (
+                        <div className="p-3 bg-green-900/20 border border-green-500/50 rounded-lg">
+                          <p className="text-green-400 text-sm">✓ Message sent successfully! I'll get back to you soon.</p>
+                        </div>
+                      )}
+
+                      {/* Submit Button */}
+                      <Button
+                        type="submit"
+                        disabled={formStatus === 'loading'}
+                        className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black font-bold disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300"
+                      >
+                        {formStatus === 'loading' ? (
+                          <>
+                            <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-4 h-4 mr-2" />
+                            Send Message
+                          </>
+                        )}
+                      </Button>
+
+                      <p className="text-xs text-cyan-500/50 text-center">
+                        * Required fields
+                      </p>
+                    </form>
                   </div>
                 </div>
               </CardContent>
@@ -846,80 +989,6 @@ export default function Home() {
           </div>
         </footer>
       </div>
-
-      {/* Work Detail Modal */}
-      <AnimatePresence>
-        {selectedWork && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-            onClick={() => setSelectedWork(null)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-black/90 border border-cyan-600 rounded-lg p-6 max-w-2xl w-full max-h-[80vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex justify-between items-start mb-4">
-                <h3 className="text-2xl font-bold text-cyan-300">{selectedWork.title}</h3>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => setSelectedWork(null)}
-                  className="text-cyan-400 hover:text-cyan-300"
-                >
-                  ×
-                </Button>
-              </div>
-              <div className="flex items-center gap-4 mb-4">
-                <Badge variant="outline" className="border-cyan-700 text-cyan-400">
-                  {selectedWork.category}
-                </Badge>
-                <div className="flex items-center gap-2 text-cyan-500">
-                  <Calendar className="w-4 h-4" />
-                  {new Date(selectedWork.date).toLocaleDateString()}
-                </div>
-                <div className="flex items-center gap-2 text-cyan-500">
-                  <Coffee className="w-4 h-4" />
-                  {selectedWork.readTime}
-                </div>
-              </div>
-              <p className="text-cyan-400/70 mb-6">{selectedWork.description}</p>
-              <div className="flex flex-wrap gap-2 mb-6">
-                {selectedWork.tags.map((tag) => (
-                  <Badge key={tag} variant="secondary" className="bg-cyan-900/20 text-cyan-300">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
-              <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-400 hover:to-purple-400 text-black">
-                Read Full Article
-              </Button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      <style jsx>{`
-        @keyframes grid {
-          0% { transform: translate(0, 0); }
-          100% { transform: translate(50px, 50px); }
-        }
-        
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-        
-        @keyframes twinkle {
-          0%, 100% { opacity: 0; }
-          50% { opacity: 1; }
-        }
-      `}</style>
     </div>
   )
 }
