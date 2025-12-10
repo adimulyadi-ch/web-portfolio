@@ -1,11 +1,53 @@
 ---
-title: "Your Blog Post Title Here"
-date: "2024-12-05"
+title: "Di Persimpangan Teknologi dan Kesadaran"
+date: "2025-12-10"
 category: "blog"
-tags: ["Tag1", "Tag2", "Tag3"]
+tags: ["poetry", "code", "consciousness"]
 featured: false
 readTime: "5 min"
-description: "A brief description of your blog post that will appear in the preview."
+description: "
+
+Di balik sunyi server yang berdenyut,
+terhampar jejak pikiran yang pernah sunyi—
+kode yang meraba gelap, mencari makna
+di antara aliran arus dan kemungkinan.
+
+Mesin belajar dari bisik data,
+namun manusia belajar dari jeda
+dari hening yang menyimpan tanya
+tentang siapa kita sebelum cahaya layar
+menyentuh kelopak jiwa.
+
+Teknologi menjahit jarak,
+menghubungkan ruang yang tak tersentuh,
+namun kesadaran mengingatkan
+bahwa kedekatan bukan sekadar sinyal
+yang berhasil sampai.
+
+Dan ketika algoritma memetakan dunia,
+kita memetakan diri
+menimbang apa yang ingin kita ciptakan
+di persimpangan takdir dan rancangan.
+
+Sebab pada akhirnya,
+di antara suara digital yang tak pernah lelah,
+kitalah yang memilih:
+apakah kecerdasan akan menjadi jembatan,
+atau hanya gema yang kehilangan arah.
+
+
+
+CODE 
+
+Dalam dunia yang semakin dipenuhi perangkat digital, kita akan berhenti sejenak dan melihat kembali hubungan antara teknologi dan manusia. Teknologi kini bekerja tanpa henti, server bergetar, algoritma berjalan, dan data terus mengalir. Namun di balik semua kecanggihan itu, ada sesuatu yang tidak bisa digantikan yaitu kesadaran dan hati manusia.
+
+mengingatkan kita bahwa teknologi bisa belajar dari angka, tetapi manusia belajar dari pengalaman. Mesin beroperasi melalui pola, tetapi manusia menemukan makna melalui jeda, keheningan, dan perasaan. Di sinilah letak perbedaan paling mendasar: kecerdasan buatan mungkin mampu memecahkan masalah, tetapi hanya manusia yang mampu memahami kehidupan secara mendalam.
+
+Teknologi memang memudahkan kita berkomunikasi dan menjembatani jarak, tetapi kedekatan sejati lahir dari perhatian dan empati hal yang tidak bisa diukur oleh sinyal atau kecepatan internet. Karena itu, meski hidup kita semakin serba digital, kita tidak boleh kehilangan sisi kemanusiaan.
+
+Pada akhirnya, teknologi adalah sebuah alat, bukan pengganti moral dan hati nurani. Kitalah yang menentukan arah penggunaannya: apakah akan menjadi kekuatan yang membantu, atau hanya gema bising yang membuat kita semakin jauh dari diri sendiri.
+
+Dengan kata lain, di tengah arus inovasi, kita diajak untuk tetap mengingat siapa yang memegang kendali bukan mesin, tetapi manusia yang sadar, bijak, dan penuh rasa."
 ---
 
 # Your Blog Post Title
