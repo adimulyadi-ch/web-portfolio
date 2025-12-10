@@ -8,7 +8,7 @@ tags:
   - "consciousness"
 featured: false
 readTime: "5 min"
-description: "The meaning in a piece of literature"
+description: " reading poetry explores meaning "
 ---
 
 
