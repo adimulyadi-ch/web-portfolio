@@ -16,49 +16,31 @@ description: "The meaning in a piece of literature"
 # Di Persimpangan Teknologi dan Kesadaran
 
 Di balik sunyi server yang berdenyut,
-
 terhampar jejak pikiran yang pernah sunyi
-
 kode yang meraba gelap, mencari makna
-
 di antara aliran arus dan kemungkinan.
 
 Mesin belajar dari bisik data,
-
 namun manusia belajar dari jeda
-
 dari hening yang menyimpan tanya
-
 tentang siapa kita sebelum cahaya layar
-
 menyentuh kelopak jiwa.
 
 Teknologi menjahit jarak,
-
 menghubungkan ruang yang tak tersentuh,
-
 namun kesadaran mengingatkan
-
 bahwa kedekatan bukan sekadar sinyal
-
 yang berhasil sampai.
 
 Dan ketika algoritma memetakan dunia,
-
 kita memetakan diri
-
 menimbang apa yang ingin kita ciptakan
-
 di persimpangan takdir dan rancangan.
 
 Sebab pada akhirnya,
-
 di antara suara digital yang tak pernah lelah,
-
 kitalah yang memilih:
-
 apakah kecerdasan akan menjadi jembatan,
-
 atau hanya gema yang kehilangan arah.
 
 
